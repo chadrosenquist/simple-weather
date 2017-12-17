@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Simple Weather</title>
+        <script src="weather.js"></script> 
+    </head>
+    <body onload="pageLoad()">
+        <h1>Simple Weather</h1>
+        Zip Code
+        <input type="text" name="zipCode" id="zipCode" onkeydown="forecastTextBoxTyping(event)" autofocus="autofocus">
+        <input type="button" onclick="forecastButtonClick()" value="Get Forecast">
+        <div id="forecastResults"></div>
+    </body>
+</html>
