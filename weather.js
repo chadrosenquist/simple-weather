@@ -31,7 +31,7 @@ function pageLoad() {
 /* Load the saved zip code.
 */
 function loadZipCode() {
-    var zipCodeValue = 'no storage';
+    var zipCodeValue = '';   // Default to no zip code.
     if (typeof(Storage) !== "undefined") {
         if (localStorage.simpleWeatherZipCode) {
             zipCodeValue = localStorage.simpleWeatherZipCode;
