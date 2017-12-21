@@ -6,8 +6,11 @@ Simple web page to get the weather.
 Sign up for your API key at:
 https://openweathermap.org/api
 
-Then put it into file `weather-key.js`.
-This file is in `.gitignore` so you don't accidentally commit your key and push to GitHub.
+Then copy:
+`cp weather-key.js-TEMPLATE weather-key.js`
+
+Edit `weather-key.js` and add your API key.  `weather-key.js` is in `.gitignore` so you don't accidentally commit your key.
+
 
 # Design
 ## Error Handling
