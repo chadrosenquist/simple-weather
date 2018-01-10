@@ -41,3 +41,6 @@ the open weather map API is invoked.  A `<script>` element is added to the HTML 
 that runs Javascript (JSONP) from open weather map.  Then the function `test()` is called with the
 results.  The results are displayed in the `<div>` element.
 
+# Testing
+Currently, there are no automated tests.
+
