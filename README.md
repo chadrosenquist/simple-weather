@@ -1,5 +1,12 @@
 # Simple Weather
-Simple web page to get the weather.
+I got tired of going to heavy duty, CPU intensive websites to get the weather forecast.
+This is a simple website that retrieves the forecast using only HTML and Javascript.  A server is not required.
+There are no ads.
+
+# Requirements
+* Requires browser to support HTML5 and ECMAScript 6.
+* Only US zip codes are supported.
+* Temperature is displayed in Fahrenheit.
 
 # Setup
 ## API Key
@@ -13,8 +20,24 @@ Edit `weather-key.js` and add your API key.  `weather-key.js` is in `.gitignore`
 
 
 # Design
-## Error Handling
-If the weather web service is down, or an error occurs, this application displays a meaningful error message to the user.
-For security, it is good practice to log a detailed error on the server, and display a generic message on the client.
-But this is a simple client-only application with no server, and I am the only user.  So meaningful errors are displayed.
+## `weather.html`
+Basic HTML.  Loads scripts `weather-key.js` and `weather.js`.
+
+Contains a textbox for the end-user to enter the zip code, a butto to click, and a `<div>` to display the results.
+
+## `weather.css`
+Basic CSS.
+
+## `weather-key.js`
+Contains function `getWeatherKey()`, which returns the key required to make the web service call.
+
+## `weather.js`
+When the page loads, the zip code is retrieved from local storage.
+If no local storage, or the end-user's first time here, default to an empty string.
+The cursor is placed in the zip code textbox with the zip code highlighted.
+
+When the end-user clicks the "Get Forecast" button, or hits "Enter" while typing the zip code,
+the open weather map API is invoked.  A `<script>` element is added to the HTML `<head>` section
+that runs Javascript (JSONP) from open weather map.  Then the function `test()` is called with the
+results.  The results are displayed in the `<div>` element.
 
