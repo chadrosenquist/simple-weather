@@ -10,8 +10,7 @@
 function forecastButtonClick() {
     var zipCode = document.getElementById('zipCode').value;
     saveZipCode(zipCode);
-    var html = getForecastHtml(zipCode);
-    document.getElementById('forecastResults').innerHTML = html;
+    callWebService(zipCode);
 }
 
 /* If the user clicks 'Enter' while typing in the zip code,
@@ -31,7 +30,7 @@ function pageLoad() {
 /* Load the saved zip code.
 */
 function loadZipCode() {
-    var zipCodeValue = 'no storage';
+    var zipCodeValue = '';   // Default to no zip code.
     if (typeof(Storage) !== "undefined") {
         if (localStorage.simpleWeatherZipCode) {
             zipCodeValue = localStorage.simpleWeatherZipCode;
@@ -61,15 +60,31 @@ function selectZipCodeText() {
    ======================================================================
 */
 
-/* Returns an HTML table of the forecast.
+/* Makes the web service call and returns the JSON.
 */
-function getForecastHtml(zipCode) {
-    var currentTemp = getCurrentTemperature(zipCode);
-    var html = `<p>Current temperature = ${currentTemp}</p>`;
-    return html;
+function callWebService(zipCode) {
+    var appID = getWeatherKey();
+    
+    var weather_script = document.createElement('script');
+    weather_script.src = `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&units=imperial&callback=weatherResponse&appid=${appID}`;
+    weather_script.type = 'text/javascript';
+    weather_script.async = true;
+    weather_script.id = 'scriptForJSONP';
+    document.querySelector('head').appendChild(weather_script); 
 }
 
-/* Makes the web service call to return the current temperature. */
-function getCurrentTemperature(zipCode) {
-    return 50;
+function weatherResponse(response) {
+    /* console.log('RESPONSE:', response); */
+    
+    var currentTemp = response.main.temp.toFixed(0);
+    var html = `<p>Current temperature = ${currentTemp}</p>`;
+        
+    document.getElementById('forecastResults').innerHTML = html;
+    
+    /* Clean up DOM. */
+    var weather_script = document.getElementById('scriptForJSONP');
+    if (weather_script != null) {
+        weather_script.parentNode.removeChild(weather_script);
+    }
 }
+
